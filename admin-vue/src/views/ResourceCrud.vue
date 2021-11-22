@@ -113,9 +113,12 @@ export default class ResourceList extends Vue {
     } catch (e) {
       return;
     }
-    await this.$http.delete(`${this.resource}/${row._id}`);
-    this.$message.success("Delete Successfully");
-    this.fetch();
+    const res = await this.$http.delete(`${this.resource}/${row._id}`);
+    if(res.deleted) {
+
+      this.$message.success("Delete Successfully");
+      this.fetch();
+    }
   }
 
   created() {
